@@ -1,0 +1,14 @@
+[
+  { "id": 1, "name": "Bulbasaur", "type": "Grass", "hp": 120, "moves": ["Tackle", "Vine Whip", "Razor Leaf", "Solar Beam"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" },
+  { "id": 4, "name": "Squirtle", "type": "Water", "hp": 115, "moves": ["Tackle", "Water Gun", "Bubble Beam", "Hydro Pump"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" },
+  { "id": 6, "name": "Charizard", "type": "Fire", "hp": 150, "moves": ["Scratch", "Ember", "Flamethrower", "Fire Blast"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" },
+  { "id": 25, "name": "Pikachu", "type": "Electric", "hp": 100, "moves": ["Quick Attack", "Thunder Shock", "Thunderbolt", "Thunder"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" },
+  { "id": 39, "name": "Jigglypuff", "type": "Fairy", "hp": 140, "moves": ["Pound", "Sing", "Double Slap", "Hyper Voice"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png" },
+  { "id": 94, "name": "Gengar", "type": "Ghost", "hp": 130, "moves": ["Lick", "Shadow Ball", "Dream Eater", "Sludge Bomb"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" },
+  { "id": 133, "name": "Eevee", "type": "Normal", "hp": 110, "moves": ["Tackle", "Tail Whip", "Bite", "Take Down"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" },
+  { "id": 143, "name": "Snorlax", "type": "Normal", "hp": 200, "moves": ["Tackle", "Body Slam", "Rest", "Hyper Beam"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png" },
+  { "id": 149, "name": "Dragonite", "type": "Dragon", "hp": 160, "moves": ["Wrap", "Dragon Rage", "Dragon Claw", "Outrage"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png" },
+  { "id": 150, "name": "Mewtwo", "type": "Psychic", "hp": 180, "moves": ["Confusion", "Swift", "Psychic", "Psystrike"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png" },
+  { "id": 448, "name": "Lucario", "type": "Fighting", "hp": 145, "moves": ["Quick Attack", "Force Palm", "Bone Rush", "Aura Sphere"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png" },
+  { "id": 658, "name": "Greninja", "type": "Water", "hp": 135, "moves": ["Pound", "Water Pulse", "Night Slash", "Water Shuriken"], "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/658.png" }
+]

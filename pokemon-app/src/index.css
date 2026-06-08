@@ -1,0 +1,102 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Karta Pokemona - bazowy wygląd */
+.pokemon-card {
+  border-radius: 12px;
+  padding: 15px;
+  width: 140px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Żeby tekst był czytelny na każdym tle */
+  cursor: pointer;
+  
+  /* Płynne przejście animacji (0.3 sekundy) */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.pokemon-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.3)); /* Cień pod samym Pokemonem */
+}
+
+/* Styl dla wybranego Pokemona w drużynie */
+.team-member {
+  border: 3px solid gold;
+}
+
+.btn-choose {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.btn-choose:hover {
+  background: white;
+}
+
+.btn-choose:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+/* Efekt najechania myszką (Hover) */
+.pokemon-card:hover {
+  transform: scale(1.1); /* Powiększa o 10% */
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+/* --- ANIMACJE WALKI --- */
+
+/* Atakujący podskakuje w górę */
+@keyframes jump-attack {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-40px) scale(1.1); }
+  100% { transform: translateY(0); }
+}
+
+/* Otrzymujący obrażenia podskakuje w dół i podświetla się na czerwono */
+@keyframes take-hit {
+  0% { transform: translateY(0); box-shadow: none; border-color: inherit; }
+  50% { transform: translateY(20px); box-shadow: 0 0 20px red; border-color: red; background-color: #ffe6e6; }
+  100% { transform: translateY(0); box-shadow: none; border-color: inherit; }
+}
+
+.anim-attack {
+  animation: jump-attack 0.5s ease-in-out;
+  z-index: 10;
+}
+
+.anim-hit {
+  animation: take-hit 0.5s ease-in-out;
+}
+
+/* Karta na arenie zablokowana (np. tura przeciwnika) */
+.battle-card {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.battle-banner {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  /* Zastępcze tło, jeśli link do obrazka przestanie działać */
+  background: linear-gradient(to bottom, #87CEEB 0%, #a8e6cf 100%); 
+}
