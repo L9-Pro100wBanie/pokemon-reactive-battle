@@ -8,7 +8,6 @@ export default function Login({ setAuth }) {
   const handleLogin = (e) => {
     e.preventDefault();
     
-    // Walidacja: minimum 3 znaki i przynajmniej jedna cyfra
     const hasNumber = /\d/.test(username);
     
     if (username.trim().length >= 3 && hasNumber) {
@@ -60,7 +59,7 @@ export default function Login({ setAuth }) {
               padding: '15px', 
               borderRadius: '10px', 
               border: 'none', 
-              background: '#3b4cca', /* Klasyczny niebieski z Pokemonów */
+              background: '#3b4cca',
               color: 'white', 
               fontSize: '1.2rem', 
               fontWeight: 'bold', 

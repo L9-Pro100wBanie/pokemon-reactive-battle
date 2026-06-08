@@ -58,11 +58,10 @@ export default function TeamBuilder() {
 
   const startBattle = (difficulty) => {
     localStorage.setItem('myTeam', JSON.stringify(team));
-    localStorage.setItem('difficulty', difficulty); // Zapisujemy poziom trudności
+    localStorage.setItem('difficulty', difficulty);
     navigate('/battle');
   };
 
-  // --- FUNKCJA MAPUJĄCA TYP NA KOLOR TŁA ---
   const getTypeColor = (type) => {
     const colors = {
       Grass: 'linear-gradient(135deg, #78C850, #4E8234)',
@@ -83,7 +82,6 @@ export default function TeamBuilder() {
     <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
       <h2 style={{ textAlign: 'center' }}>Witaj Trenerze {localStorage.getItem('user')}!</h2>
       
-      {/* Sekcja Twojej drużyny */}
       <div style={{ background: 'white', padding: '20px', borderRadius: '12px', boxShadow: '0 4px 10px rgba(0,0,0,0.05)', marginBottom: '30px' }}>
         <h3 style={{ marginTop: 0 }}>Twój skład ({team.length}/6)</h3>
         
@@ -136,7 +134,6 @@ export default function TeamBuilder() {
         )}
       </div>
 
-      {/* Wyszukiwarka RxJS */}
       <div style={{ marginBottom: '20px' }}>
         <input 
           type="text" 
@@ -148,7 +145,6 @@ export default function TeamBuilder() {
         {isSearching && <p style={{ color: '#6890F0', fontWeight: 'bold' }}>Szukam Pokemonów (RxJS)...</p>}
       </div>
 
-      {/* Lista dostępnych Pokemonów */}
       <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
         {filteredPokemon.map((poke) => (
           <div 

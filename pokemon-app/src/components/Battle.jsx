@@ -15,17 +15,15 @@ export default function Battle() {
   const [battleLog, setBattleLog] = useState(["Witaj na arenie! Przygotuj się do walki."]);
   const [gameOver, setGameOver] = useState(null);
   
-  // LOGIKA TUR I ANIMACJI
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
   const [playerAnim, setPlayerAnim] = useState('');
   const [opponentAnim, setOpponentAnim] = useState('');
 
-  // Strumień do ochrony przed spamowaniem (używamy exhaustMap z RxJS)
   const actionSubject = useMemo(() => new Subject(), []);
 
   useEffect(() => {
     const savedTeam = JSON.parse(localStorage.getItem('myTeam'));
-    const difficulty = parseInt(localStorage.getItem('difficulty')) || 4; // Domyślnie 4, jeśli błąd
+    const difficulty = parseInt(localStorage.getItem('difficulty')) || 4;
 
     if (!savedTeam) {
       navigate('/team-builder');
@@ -34,23 +32,20 @@ export default function Battle() {
 
     setPlayerTeam(savedTeam.map(p => ({ ...p, currentHp: p.hp })));
     
-    // Losujemy drużynę przeciwnika na podstawie wybranego poziomu trudności
     const shuffledData = [...pokemonData].sort(() => 0.5 - Math.random());
     const enemyTeam = shuffledData.slice(0, difficulty).map(p => ({ ...p, currentHp: p.hp }));
     setOpponentTeam(enemyTeam);
   }, [navigate]);
 
   useEffect(() => {
-    // Używamy exhaustMap - ignoruje WSZYSTKIE kolejne kliknięcia, dopóki aktualna akcja się nie zakończy
     const subscription = actionSubject.pipe(
       exhaustMap(action => {
-        setIsPlayerTurn(false); // Blokujemy interfejs
+        setIsPlayerTurn(false);
         return new Promise(resolve => executeTurn(action, resolve));
       })
     ).subscribe();
 
     return () => subscription.unsubscribe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerTeam, opponentTeam, activePlayerIdx, activeOpponentIdx, gameOver]);
 
   const addLog = (message) => setBattleLog(prev => [message, ...prev].slice(0, 6));
@@ -63,19 +58,15 @@ export default function Battle() {
     } else if (action.type === 'SWITCH') {
       setActivePlayerIdx(action.index);
       addLog(`Wracaj ${playerTeam[activePlayerIdx].name}! Wybieram Cię: ${playerTeam[action.index].name}!`);
-      // Zmiana to też tura, więc od razu odpowiada przeciwnik
       setTimeout(() => opponentTurnSequence(resolvePromise), 1000);
     }
   };
 
-  // --- SEKWENCJA ATAKU GRACZA ---
   const handleAttackSequence = (moveName, resolvePromise) => {
     const damage = Math.floor(Math.random() * 20) + 15;
     
-    // 1. Animacja podskoku gracza
     setPlayerAnim('anim-attack');
     
-    // 2. Po 0.5s animacja uderzenia wroga
     setTimeout(() => setOpponentAnim('anim-hit'), 500);
 
     setTimeout(() => {
@@ -105,13 +96,11 @@ export default function Battle() {
       } else {
         newOpponentTeam[activeOpponentIdx] = currentEnemy;
         setOpponentTeam(newOpponentTeam);
-        // Jeśli wróg przeżył, wykonuje swój ruch
         setTimeout(() => opponentTurnSequence(resolvePromise), 1000);
       }
-    }, 1000); // Czas trwania całego ataku gracza
+    }, 1000);
   };
 
-  // --- SEKWENCJA ATAKU PRZECIWNIKA ---
   const opponentTurnSequence = (resolvePromise) => {
     const activeEnemy = opponentTeam[activeOpponentIdx];
     const randomMove = activeEnemy.moves[Math.floor(Math.random() * activeEnemy.moves.length)];
@@ -145,7 +134,7 @@ export default function Battle() {
         setPlayerTeam(newPlayerTeam);
       }
       
-      setIsPlayerTurn(true); // Tura wraca do gracza
+      setIsPlayerTurn(true);
       resolvePromise();
     }, 1000);
   };
@@ -158,7 +147,6 @@ export default function Battle() {
           {gameOver === 'win' ? '🏆 WYGRAŁEŚ WALKĘ! 🏆' : '💀 ZESPÓŁ POKONANY 💀'}
         </h1>
         
-        {/* Skaczący Pikachu przy wygranej */}
         {gameOver === 'win' && (
           <div>
             <img 
@@ -182,16 +170,14 @@ export default function Battle() {
 return (
     <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
       
-      {/* NOWY BANNER STADIONU */}
       <img 
         src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/e/e3/latest/20191122144704/Estadio_de_Pueblo_Hoyuelo.png/1200px-Estadio_de_Pueblo_Hoyuelo.png" 
         alt="Battle Stadium" 
         className="battle-banner"
       />
 
-      {/* ARENA */}
       <div style={{ display: 'flex', justifyContent: 'space-between', background: 'linear-gradient(to bottom, #d4f0ff 0%, #e8f9e9 100%)', padding: '30px', borderRadius: '15px', border: '3px solid #ccc' }}> 
-        {/* Twój Pokemon */}
+        
         <div style={{ width: '40%', textAlign: 'center' }}>
           <div style={{ background: 'rgba(255,255,255,0.8)', padding: '10px', borderRadius: '10px', marginBottom: '10px' }}>
             <h3 style={{ margin: 0 }}>{activePlayer.name}</h3>
@@ -208,7 +194,6 @@ return (
           />
         </div>
 
-        {/* Pokemon Przeciwnika */}
         <div style={{ width: '40%', textAlign: 'center' }}>
           <div style={{ background: 'rgba(255,255,255,0.8)', padding: '10px', borderRadius: '10px', marginBottom: '10px' }}>
             <h3 style={{ margin: 0 }}>Przeciwnik: {activeOpponent.name}</h3>
@@ -227,7 +212,6 @@ return (
       </div>
 
       <div style={{ display: 'flex', marginTop: '20px', gap: '20px' }}>
-        {/* Przyciski ataków */}
         <div style={{ flex: 1 }}>
           <h3 style={{ marginTop: 0 }}>Ruchy (Tura: {isPlayerTurn ? 'TWOJA' : 'PRZECIWNIKA'})</h3>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
@@ -248,7 +232,6 @@ return (
           </div>
         </div>
 
-        {/* Logi Walki */}
         <div style={{ flex: 1, background: '#333', color: 'white', padding: '15px', borderRadius: '8px', boxShadow: 'inset 0 0 10px black' }}>
           {battleLog.map((log, i) => (
             <p key={i} style={{ margin: '5px 0', opacity: 1 - (i * 0.15), fontSize: i === 0 ? '1.1rem' : '0.9rem', color: i === 0 ? 'yellow' : 'white' }}>
@@ -258,7 +241,6 @@ return (
         </div>
       </div>
 
-      {/* Zmiana Pokemonów */}
       <div style={{ marginTop: '30px', background: 'white', padding: '15px', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
         <h3 style={{ marginTop: 0 }}>Twoja drużyna (Zmiana kosztuje turę!)</h3>
         <div style={{ display: 'flex', gap: '15px', overflowX: 'auto', paddingBottom: '10px' }}>
