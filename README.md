@@ -19,7 +19,7 @@ Aby uruchomić projekt na swoim komputerze, upewnij się, że masz zainstalowane
 1. **Pobierz projekt:**
    Sklonuj repozytorium za pomocą Gita lub pobierz jako plik ZIP i rozpakuj.
    ```bash
-   git clone <TUTAJ_WKLEJ_LINK_DO_SWOJEGO_REPOZYTORIUM>
+   git clone https://github.com/L9-Pro100wBanie/pokemon-reactive-battle
 
 Przejdź do folderu z projektem:
    cd pokemon-reactive-battle
